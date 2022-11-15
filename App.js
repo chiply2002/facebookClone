@@ -35,7 +35,7 @@ export const TabNavigator = () => {
       />
       <Tab.Screen
         name="Watch"
-        component={LoginScreen}
+        component={SignupScreen}
         options={{
           tabBarColor: 'white',
           tabBarIcon: ({color, focused}) => (
@@ -99,6 +99,11 @@ export const StackNavigation = () => {
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MyProfileScreen"
+        component={MyProfileScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

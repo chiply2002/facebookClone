@@ -7,12 +7,21 @@ import {
   Button,
 } from 'react-native';
 import React from 'react';
+import {signOut} from 'firebase/auth';
+import {authentication} from '../firebase/firebase-config';
 import Feather from 'react-native-vector-icons/Feather';
 import Avatar from '../components/Avatar';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const SettingScreen = () => {
+  const SignOutUser = () => {
+    signOut(authentication)
+      .then(err => {
+        setIsSignIn(false);
+      })
+      .catch(err => console.log(err));
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.headerContainer}>
@@ -38,7 +47,7 @@ const SettingScreen = () => {
       <View style={styles.menuContainer}>
         <TouchableOpacity style={styles.menuChild}>
           <FontAwesome5 name="newspaper" size={25} color="grey" />
-          <Text>New feed</Text>
+          <Text>Feeds</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuChild}>
           <FontAwesome5 name="user-friends" size={25} color="blue" />
@@ -54,6 +63,17 @@ const SettingScreen = () => {
         <TouchableOpacity style={styles.menuChild}>
           <AntDesign name="calendar" size={25} color="red" />
           <Text>Events</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.menuContainer}>
+        <TouchableOpacity style={styles.menuChild}>
+          <AntDesign name="clockcircleo" size={25} color="green" />
+          <Text>Memories</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuChild}>
+          <AntDesign name="creditcard" size={25} color="black" />
+          <Text>Facebook Pay</Text>
         </TouchableOpacity>
       </View>
 
@@ -105,7 +125,7 @@ const SettingScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.button}>
-        <Button title="Logout" color="lightgray" />
+        <Button title="Logout" color="lightgray" onPress={SignOutUser} />
       </View>
     </SafeAreaView>
   );

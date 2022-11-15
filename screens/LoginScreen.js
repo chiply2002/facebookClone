@@ -36,6 +36,7 @@ const LoginScreen = ({navigation}) => {
   const SignInUser = () => {
     signInWithEmailAndPassword(authentication, email, password)
       .then(err => {
+        navigation.navigate('MyProfileScreen');
         console.log('login');
         setIsSignIn(true);
       })

@@ -7,7 +7,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-const MyProfileScreen = () => {
+const MyProfileScreen = ({navigation}) => {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
@@ -21,7 +21,11 @@ const MyProfileScreen = () => {
       <View style={styles.container}>
         <Image style={styles.coverPhoto} source={FacebookCover} />
         <Image style={styles.profilePhoto} source={Ava} />
-        <Text style={styles.name}>{currentUser.email}</Text>
+        {currentUser ? (
+          <Text style={styles.name}>{currentUser.email}</Text>
+        ) : (
+          navigation.navigate('Login')
+        )}
 
         <View style={styles.iconsContainer}>
           <View style={{alignItems: 'center'}}>
