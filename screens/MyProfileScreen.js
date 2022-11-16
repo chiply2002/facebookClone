@@ -7,6 +7,9 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feed from '../components/Feed';
+import {postArray} from '../DummyData';
+import FeaturedPhotos from '../components/FeaturedPhotos';
 const MyProfileScreen = ({navigation}) => {
   const [currentUser, setCurrentUser] = useState();
 
@@ -18,32 +21,41 @@ const MyProfileScreen = ({navigation}) => {
   }, []);
   return (
     <>
-      <View style={styles.container}>
-        <Image style={styles.coverPhoto} source={FacebookCover} />
-        <Image style={styles.profilePhoto} source={Ava} />
-        {currentUser ? (
-          <Text style={styles.name}>{currentUser.email}</Text>
-        ) : (
-          navigation.navigate('Login')
-        )}
+      <Feed
+        posts={postArray}
+        navigation={navigation}
+        header={
+          <>
+            <View style={styles.container}>
+              <Image style={styles.coverPhoto} source={FacebookCover} />
+              <Image style={styles.profilePhoto} source={Ava} />
+              {currentUser ? (
+                <Text style={styles.name}>{currentUser.email}</Text>
+              ) : (
+                navigation.navigate('Login')
+              )}
 
-        <View style={styles.iconsContainer}>
-          <View style={{alignItems: 'center'}}>
-            <SimpleLineIcons name="note" size={20} color="#6a7180" />
-            <Text style={{color: '#6a7180'}}>Post</Text>
-          </View>
+              <View style={styles.iconsContainer}>
+                <View style={{alignItems: 'center'}}>
+                  <SimpleLineIcons name="note" size={20} color="#6a7180" />
+                  <Text style={{color: '#6a7180'}}>Post</Text>
+                </View>
 
-          <View style={{alignItems: 'center'}}>
-            <SimpleLineIcons name="user-follow" size={20} color="#6a7180" />
-            <Text style={{color: '#6a7180'}}>Update Info</Text>
-          </View>
+                <View style={{alignItems: 'center'}}>
+                  <SimpleLineIcons
+                    name="user-follow"
+                    size={20}
+                    color="#6a7180"
+                  />
+                  <Text style={{color: '#6a7180'}}>Update Info</Text>
+                </View>
 
-          <View style={{alignItems: 'center'}}>
-            <SimpleLineIcons name="chart" size={20} color="#6a7180" />
-            <Text style={{color: '#6a7180'}}>Activity Log</Text>
-          </View>
+                <View style={{alignItems: 'center'}}>
+                  <SimpleLineIcons name="chart" size={20} color="#6a7180" />
+                  <Text style={{color: '#6a7180'}}>Activity Log</Text>
+                </View>
 
-          {/* <View style={{alignItems: 'center'}}>
+                {/* <View style={{alignItems: 'center'}}>
               <SimpleLineIcons
                 name="user-following"
                 size={20}
@@ -52,16 +64,20 @@ const MyProfileScreen = ({navigation}) => {
               <Text style={{color: '#6a7180'}}>Friends</Text>
             </View> */}
 
-          <View style={{alignItems: 'center'}}>
-            <Feather name="more-horizontal" size={20} color="#6a7180" />
-            <Text style={{color: '#6a7180'}}>More</Text>
-          </View>
-        </View>
+                <View style={{alignItems: 'center'}}>
+                  <Feather name="more-horizontal" size={20} color="#6a7180" />
+                  <Text style={{color: '#6a7180'}}>More</Text>
+                </View>
+              </View>
 
-        <Text style={styles.desc}>
-          🔥 Excepteur duis id cillum ullamco fugiat reprehenderit 🚀
-        </Text>
-      </View>
+              <Text style={styles.desc}>
+                🔥 Excepteur duis id cillum ullamco fugiat reprehenderit 🚀
+              </Text>
+            </View>
+            <FeaturedPhotos />
+          </>
+        }
+      />
 
       {/* <View style={styles.userInfoContainer}>
         <View style={styles.userInfoItem}>

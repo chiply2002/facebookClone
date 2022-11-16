@@ -17,10 +17,12 @@ import EyeClose from '../assets/eye_close.png';
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
   const [showPass, setShowPass] = useState(false);
+  const [showCPass, setShowCPass] = useState(false);
 
   // const [isSignIn, setIsSignIn] = useState(false);
 
@@ -33,6 +35,23 @@ const SignupScreen = ({navigation}) => {
       .catch(re => {
         console.log(re);
       });
+  };
+
+  const validateForm = () => {
+    var form_inputs = [name, email, phone, password, confirmPassword];
+    var password_match = password == confirmPassword;
+
+    if (form_inputs.includes('') || form_inputs.includes(undefined)) {
+      console.log('Please fill in all fields');
+    }
+
+    if (!password_match) {
+      console.log('Wrong Pass');
+    }
+
+    if (password_match) {
+      RegisterUser();
+    }
   };
 
   return (
@@ -88,8 +107,42 @@ const SignupScreen = ({navigation}) => {
           />
         </TouchableOpacity>
       </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingHorizontal: 10,
+        }}>
+        <TextInput
+          style={{
+            flex: 1,
+            height: 40,
+            borderWidth: 0.5,
+          }}
+          placeholder="Enter confirm password"
+          onChangeText={text => setConfirmPassword(text)}
+          secureTextEntry={!showCPass}
+        />
+        <TouchableOpacity
+          style={{
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+          }}
+          onPress={() => setShowCPass(!showCPass)}>
+          <Image
+            source={showCPass ? EyeClose : Eye}
+            style={{
+              height: 20,
+              width: 20,
+              tintColor: 'gray',
+              position: 'absolute',
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.button}>
-        <Button title="Sign Up" onPress={RegisterUser} />
+        <Button title="Sign Up" onPress={validateForm} />
       </View>
       <View
         style={{
